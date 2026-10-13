@@ -5,7 +5,7 @@ cask "grove" do
   url "https://github.com/efim0v/grove/releases/download/#{version}/Grove.zip"
   name "Grove"
   desc "Git-worktree workspaces for parallel Claude Code sessions"
-  homepage "https://github.com/efim0v/grove"
+  homepage "https://efim0v.github.io/grove/"
 
   livecheck do
     url :url
