@@ -1,9 +1,9 @@
 class GroveCli < Formula
   desc "Command-line tool for Grove's git-worktree workspaces"
   homepage "https://efim0v.github.io/grove/"
-  url "https://github.com/efim0v/grove/releases/download/0.2.0/grove-cli.zip"
-  sha256 "7e84db562657088e7759ecd868144bd04a26b6f381d7679a4744287938c60270"
-  license "MIT"
+  url "https://github.com/efim0v/grove/releases/download/0.2.2/grove-cli.zip"
+  sha256 "b971b7bff1a18a50ba36c9e4d5fa0e70d6fed74459f01c9a2ad80a0f0f104ab6"
+  license "GPL-3.0-only"
 
   livecheck do
     url :stable
@@ -18,6 +18,7 @@ class GroveCli < Formula
   end
 
   test do
+    assert_match version.to_s, shell_output("#{bin}/grove --version")
     assert_match "grove scan <path> [--json]", shell_output("#{bin}/grove help")
 
     system "git", "init", "--quiet", "--initial-branch=main", testpath/"project/app"
