@@ -30,11 +30,12 @@ Brow and Grove are signed ad hoc and not notarized by Apple yet. Homebrew quaran
 
 ## Updates
 
-Neither app updates itself. New versions come through Homebrew:
+Neither app updates itself. New versions come through Homebrew. Upgrade each package you installed:
 
 ```sh
 brew update
-brew upgrade --cask brow grove
+brew upgrade --cask brow
+brew upgrade --cask grove
 brew upgrade grove-cli
 ```
 
@@ -52,7 +53,7 @@ brew uninstall grove-cli
 
 `brew uninstall --zap --cask brow` (or `grove`) also moves the app's own files in `~/Library` to the Trash: its settings, Brow's cached readings, network caches and per-account browser profiles, Grove's statistics and scripts. Brow keeps one file in Grove's folder, `~/Library/Application Support/Grove/oauth-usage-ledger.json`; zapping either app removes it, and Brow, if still installed, writes a new one on its next request. `--zap` does not touch Claude Code's own folders, `~/.claude` and `~/.claude-accounts`.
 
-Before you remove Grove, press **Stop** next to *monitoring* for each account on Grove's **Accounts** screen. Grove points a monitored account's Claude Code `statusLine` at a script in `~/Library/Application Support/Grove/bin`, which `--zap` deletes; **Stop** restores the command you had before. Before you remove Brow, turn off **Launch at login** in its settings if you turned it on.
+Before you remove Grove, press **Stop** next to *monitoring* for each account on Grove's **Accounts** screen. Grove points a monitored account's Claude Code `statusLine` at a script in `~/Library/Application Support/Grove/bin`, which `--zap` moves to the Trash; **Stop** restores the command you had before. Before you remove Brow, turn off **Launch at login** in its settings if you turned it on.
 
 Each app's README lists what it changes on your Mac: [Brow](https://github.com/efim0v/brow#what-brow-does-on-your-machine), [Grove](https://github.com/efim0v/grove#what-grove-does-on-your-machine).
 
@@ -63,7 +64,7 @@ Problems with an app itself go to its own issue tracker: [Brow](https://github.c
 ## Releasing a new version
 
 1. Publish the release in the app's repository with its zip files and `SHA256SUMS.txt`.
-2. Here, update `version` and `sha256` in the cask, or the version in `url` and `sha256` in the formula, from that `SHA256SUMS.txt`. If the release changes the app's license, update `license` in the formula too: the online audit compares it with the license GitHub detects at the release tag.
+2. Here, update `version` and `sha256` in the cask, or the version in `url` and `sha256` in the formula, from that `SHA256SUMS.txt`. If the release changes the app's license, update `license` in the formula too. CI won't catch a stale one: `brew audit` compares a formula's license with GitHub's only in homebrew/core.
 3. Open a pull request. The [tests workflow](.github/workflows/tests.yml) runs `brew style`, runs `brew audit --strict --online` on every cask and formula, downloads every release asset to check its SHA-256, and installs and tests the formula.
 
 Once a newer Brow or Grove release is out, the online audit of its cask fails until the cask is bumped, because its `livecheck` finds the newer version.
