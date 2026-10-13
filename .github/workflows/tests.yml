@@ -1,0 +1,71 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push to a pull request cancels the run still going for it.
+# Runs for main are never cancelled mid-run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  tap:
+    name: Style, audit and checksums
+    # Every cask and the formula need macOS 26 on Apple silicon, like this image.
+    runs-on: macos-26
+    timeout-minutes: 30
+    env:
+      # The online audits call the GitHub API; the job's read-only token avoids the anonymous rate limit.
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_ENV_HINTS: "1"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Update Homebrew
+        run: |
+          brew update
+          brew --version
+
+      - name: Tap this checkout
+        run: |
+          brew tap efim0v/tap "$GITHUB_WORKSPACE"
+          brew trust --tap efim0v/tap
+
+      - name: brew style
+        run: brew style efim0v/tap
+
+      - name: brew audit
+        run: |
+          for file in Casks/*.rb; do
+            brew audit --strict --online --cask "efim0v/tap/$(basename "$file" .rb)"
+          done
+          for file in Formula/*.rb; do
+            brew audit --strict --online --formula "efim0v/tap/$(basename "$file" .rb)"
+          done
+
+      - name: brew fetch (downloads each release asset and checks its sha256)
+        run: |
+          for file in Casks/*.rb; do
+            brew fetch --force --cask "efim0v/tap/$(basename "$file" .rb)"
+          done
+          for file in Formula/*.rb; do
+            brew fetch --force --formula "efim0v/tap/$(basename "$file" .rb)"
+          done
+
+      - name: Install and test the formulae
+        run: |
+          for file in Formula/*.rb; do
+            name="efim0v/tap/$(basename "$file" .rb)"
+            brew install --formula "$name"
+            brew test "$name"
+          done
