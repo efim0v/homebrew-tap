@@ -1,6 +1,6 @@
 cask "brow" do
-  version "0.3.0"
-  sha256 "23c74006512837f5cccf1720632c195bda821e78009af592f2bd167b3224af2b"
+  version "0.3.1"
+  sha256 "10eda0d0e3621ed4ca2673a94c7e64e20ebb52cf4a8cfbb810cb65b347823909"
 
   url "https://github.com/efim0v/brow/releases/download/#{version}/Brow.zip"
   name "Brow"
