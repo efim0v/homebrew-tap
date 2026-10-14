@@ -5,7 +5,7 @@ cask "brow" do
   url "https://github.com/efim0v/brow/releases/download/#{version}/Brow.zip"
   name "Brow"
   desc "Notch display of Claude Code usage and rate limits for every account"
-  homepage "https://efim0v.github.io/brow/"
+  homepage "https://efimov.page/brow/"
 
   livecheck do
     url :url

@@ -1,6 +1,6 @@
 class GroveCli < Formula
   desc "Command-line tool for Grove's git-worktree workspaces"
-  homepage "https://efim0v.github.io/grove/"
+  homepage "https://efimov.page/grove/"
   url "https://github.com/efim0v/grove/releases/download/0.2.2/grove-cli.zip"
   sha256 "b971b7bff1a18a50ba36c9e4d5fa0e70d6fed74459f01c9a2ad80a0f0f104ab6"
   license "GPL-3.0-only"
