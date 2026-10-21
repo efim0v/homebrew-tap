@@ -1,8 +1,8 @@
 class BrowCli < Formula
   desc "Command-line tool for Brow's git-worktree workspaces across repositories"
   homepage "https://efimov.page/brow/"
-  url "https://github.com/efim0v/brow/releases/download/0.4.0/brow-cli.zip"
-  sha256 "d2d7898f1a71d17acc4829e2563331105512f60040eef4bff19c2d27a00678b5"
+  url "https://github.com/efim0v/brow/releases/download/0.5.0/brow-cli.zip"
+  sha256 "0165abb5acb157c47b28c49c5a67086a2c6f4d76e001a0b34c4cb36bb7193ee0"
   license "GPL-3.0-only"
 
   livecheck do
