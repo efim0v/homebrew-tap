@@ -6,7 +6,7 @@
 
 | Package | Install | What it is |
 |---|---|---|
-| [`brow`](Casks/brow.rb) (cask) | `brew install --cask efim0v/tap/brow` | [Brow](https://github.com/efim0v/brow) shows, in the MacBook notch, the usage and rate limits of every Claude Code account you have: the 5-hour limit, the weekly limit and when each resets. Its Workspaces, in the menu bar, gives each feature of a multi-repo project its own folder of git worktrees, so parallel Claude Code sessions don't trip over each other's branches. |
+| [`brow`](Casks/brow.rb) (cask) | `brew install --cask efim0v/tap/brow` | [Brow](https://github.com/efim0v/brow) shows, in the MacBook notch, the usage and rate limits of every Claude Code account you have: the 5-hour limit, the weekly limit and when each resets. Its Workspaces, in the same panel, gives each feature of a multi-repo project its own folder of git worktrees, so parallel Claude Code sessions don't trip over each other's branches. |
 | [`brow-cli`](Formula/brow-cli.rb) (formula) | `brew install efim0v/tap/brow-cli` | `brow`, the command-line tool for Workspaces: `scan`, `workspaces`, `sessions`, `create`, `graph` and `doctor`. It also answers to `grove`, its name in Grove. |
 | [`grove`](Casks/grove.rb) (cask, deprecated) | | Grove has moved into Brow, as Workspaces: see [Coming from Grove](#coming-from-grove). The cask stays for Grove 0.2.2 and points to Brow. |
 
